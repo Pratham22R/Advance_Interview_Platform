@@ -1,7 +1,9 @@
+// src/app/layout.tsx (SERVER COMPONENT)
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
-import ConvexClerkProvider from "@/components/ui/providers/ConvexClerkProvider";
+import ClientProviders from "@/components/ClientProviders"; // Client-only logic
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,18 +23,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <ConvexClerkProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
-    </ConvexClerkProvider>
   );
 }

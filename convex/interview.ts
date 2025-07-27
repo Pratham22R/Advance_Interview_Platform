@@ -2,29 +2,33 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const getAllInterviews = query({
-    handler: async (ctx) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthorized");
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      console.error("Not authenticated");
+      throw new Error("Unauthorized");
+    }
 
-        const interviews = await ctx.db.query("interviews").collect();
-
-        return interviews;
-    },
+    // Fetch interviews if authenticated
+    return await ctx.db.query("interviews").collect();
+  },
 });
 
 export const getMyInterviews = query({
-    handler: async (ctx) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) return [];
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
 
-        const interviews = await ctx.db
-            .query("interviews")
-            .withIndex("by_candidate_id", (q) => q.eq("candidateId", identity.subject))
-            .collect();
+    const interviews = await ctx.db
+      .query("interviews")
+      .withIndex("by_candidate_id", (q) => q.eq("candidateId", identity.subject))
+      .collect();
 
-        return interviews!;
-    },
+    // Defensive: filter out undefined/null/broken entries
+    return interviews.filter((interview) => interview && interview.streamCallId && interview.title);
+  },
 });
+
 
 export const getInterviewByStreamCallId = query({
     args: { streamCallId: v.string() },
