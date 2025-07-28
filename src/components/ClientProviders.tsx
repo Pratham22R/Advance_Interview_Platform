@@ -14,6 +14,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
                            pathname.startsWith("/meeting") ||
                            pathname.startsWith("/schedule") ||
                            pathname.startsWith("/recordings") ||
+                           pathname.startsWith("/dashboard") ||
                            pathname.startsWith("/(admin)");
 
   return (
