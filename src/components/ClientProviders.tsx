@@ -24,7 +24,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
           <SignedIn>
             <div className="min-h-screen">
               {isProtectedRoute && <Navbar />}
-              <main className="px-4 sm:px-6 lg:px-8">{children}</main>
+              <main className="">{children}</main>
             </div>
           </SignedIn>
 
