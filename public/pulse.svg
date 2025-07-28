@@ -1,0 +1,6 @@
+<!-- public/pulse.svg -->
+<svg width="212" height="212" viewBox="0 0 212 212" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 106H50L70 160L100 60L120 106H160L212 106" stroke="#0ba380" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="500" stroke-dashoffset="500">
+    <animate attributeName="stroke-dashoffset" from="500" to="0" dur="4s" fill="freeze" repeatCount="1"></animate>
+  </path>
+</svg>

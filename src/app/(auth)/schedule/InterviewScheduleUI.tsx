@@ -132,8 +132,8 @@ function InterviewScheduleUI() {
   );
 
   return (
-    <div className="container max-w-7xl mx-auto p-6 space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="container max-w-7xl mx-auto p-4 md:p-6 space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         {/* HEADER INFO */}
         <div>
           <h1 className="text-3xl font-bold">Interviews</h1>
@@ -141,7 +141,6 @@ function InterviewScheduleUI() {
         </div>
 
         {/* DIALOG */}
-
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button size="lg">Schedule Interview</Button>
@@ -152,7 +151,7 @@ function InterviewScheduleUI() {
               <DialogTitle>Schedule Interview</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-4">
-              {/* INTERVIEW TITLE */}
+              {/* FORM FIELDS */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Title</label>
                 <Input
@@ -161,8 +160,6 @@ function InterviewScheduleUI() {
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 />
               </div>
-
-              {/* INTERVIEW DESC */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
@@ -172,8 +169,6 @@ function InterviewScheduleUI() {
                   rows={3}
                 />
               </div>
-
-              {/* CANDIDATE */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Candidate</label>
                 <Select
@@ -192,8 +187,6 @@ function InterviewScheduleUI() {
                   </SelectContent>
                 </Select>
               </div>
-
-              {/* INTERVIEWERS */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Interviewers</label>
                 <div className="flex flex-wrap gap-2 mb-2">
@@ -229,11 +222,8 @@ function InterviewScheduleUI() {
                   </Select>
                 )}
               </div>
-
-              {/* DATE & TIME */}
-              <div className="flex gap-4">
-                {/* CALENDAR */}
-                <div className="space-y-2">
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="space-y-2 w-full md:w-1/2">
                   <label className="text-sm font-medium">Date</label>
                   <Calendar
                     mode="single"
@@ -243,10 +233,7 @@ function InterviewScheduleUI() {
                     className="rounded-md border"
                   />
                 </div>
-
-                {/* TIME */}
-
-                <div className="space-y-2">
+                <div className="space-y-2 w-full md:w-1/2">
                   <label className="text-sm font-medium">Time</label>
                   <Select
                     value={formData.time}
@@ -265,8 +252,6 @@ function InterviewScheduleUI() {
                   </Select>
                 </div>
               </div>
-
-              {/* ACTION BUTTONS */}
               <div className="flex justify-end gap-3 pt-4">
                 <Button variant="outline" onClick={() => setOpen(false)}>
                   Cancel
@@ -293,8 +278,8 @@ function InterviewScheduleUI() {
           <Loader2Icon className="size-8 animate-spin text-muted-foreground" />
         </div>
       ) : interviews.length > 0 ? (
-        <div className="spacey-4">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-4">
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {interviews.map((interview) => (
               <MeetingCard key={interview._id} interview={interview} />
             ))}
@@ -306,4 +291,4 @@ function InterviewScheduleUI() {
     </div>
   );
 }
-export default InterviewScheduleUI; 
+export default InterviewScheduleUI;
