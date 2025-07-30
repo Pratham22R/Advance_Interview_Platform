@@ -1,36 +1,215 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EvalMeet 🎥💬
 
-## Getting Started
+**EvalMeet** is a modern, full-stack interview platform built with **Next.js 14**, **Convex**, **Clerk**, and **Stream Video SDK**. It enables seamless technical interviews, real-time collaboration, scheduling, and recording — all with a beautiful UI and a premium developer experience.
 
-First, run the development server:
+🌐 **Live Site**: [evalmeet.vercel.app](https://evalmeet.vercel.app)
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication** via [Clerk](https://clerk.dev)
+- 🎥 **Video Rooms** powered by [Stream Video SDK](https://getstream.io)
+- 🧠 **Smart Interview Tools** — code editor, comments, and scheduling
+- 📼 **Interview Recordings** to revisit candidate sessions
+- 📊 **Admin Dashboard** for managing interview workflows
+- 🌗 **Dark/Light Theme** toggle
+- ⚡ **Convex Backend** for real-time data management
+- 💅 **TailwindCSS + ShadCN/UI** for beautiful UI components
+
+---
+
+## 🗂️ Directory Overview
+
+```bash
+Directory structure:
+└── pratham22r-evalmeet/
+    ├── README.md
+    ├── components.json
+    ├── next.config.mjs
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── tailwind.config.ts
+    ├── tsconfig.json
+    ├── convex/
+    │   ├── README.md
+    │   ├── auth.config.ts
+    │   ├── comments.ts
+    │   ├── http.ts
+    │   ├── interview.ts
+    │   ├── schema.ts
+    │   ├── tsconfig.json
+    │   ├── users.ts
+    │   └── _generated/
+    │       ├── api.d.ts
+    │       ├── api.js
+    │       ├── dataModel.d.ts
+    │       ├── server.d.ts
+    │       └── server.js
+    └── src/
+        ├── middleware.ts
+        ├── actions/
+        │   └── stream.actions.ts
+        ├── app/
+        │   ├── globals.css
+        │   ├── layout.tsx
+        │   ├── page.tsx
+        │   ├── (admin)/
+        │   │   └── dashboard/
+        │   │       └── page.tsx
+        │   ├── (auth)/
+        │   │   ├── layout.tsx
+        │   │   ├── home/
+        │   │   │   ├── HomeContent.tsx
+        │   │   │   └── page.tsx
+        │   │   ├── meeting/
+        │   │   │   └── [id]/
+        │   │   │       └── page.tsx
+        │   │   ├── recordings/
+        │   │   │   └── page.tsx
+        │   │   └── schedule/
+        │   │       ├── InterviewScheduleUI.tsx
+        │   │       └── page.tsx
+        │   ├── sign-in/
+        │   │   └── [[...sign-in]]/
+        │   │       └── page.tsx
+        │   └── sign-up/
+        │       └── [[...sign-up]]/
+        │           └── page.tsx
+        ├── components/
+        │   ├── ActionCard.tsx
+        │   ├── ClientProviders.tsx
+        │   ├── CodeEditor.tsx
+        │   ├── CommentDialog.tsx
+        │   ├── DasboardBtn.tsx
+        │   ├── EndCallButton.tsx
+        │   ├── LoaderUI.tsx
+        │   ├── MeetingCard.tsx
+        │   ├── MeetingModal.tsx
+        │   ├── MeetingRoom.tsx
+        │   ├── MeetingSetup.tsx
+        │   ├── ModeToggle.tsx
+        │   ├── Navbar.tsx
+        │   ├── RecordingCard.tsx
+        │   ├── UserInfo.tsx
+        │   ├── landing/
+        │   │   ├── CTASection.tsx
+        │   │   ├── FeaturesSection.tsx
+        │   │   ├── Footer.tsx
+        │   │   ├── Header.tsx
+        │   │   ├── HeroSection.tsx
+        │   │   ├── LandingPage.tsx
+        │   │   └── StatsSection.tsx
+        │   ├── providers/
+        │   │   ├── ConvexClerkProvider.tsx
+        │   │   ├── StreamClientProvider.tsx
+        │   │   └── ThemeProvider.tsx
+        │   └── ui/
+        │       ├── avatar.tsx
+        │       ├── badge.tsx
+        │       ├── button.tsx
+        │       ├── calendar.tsx
+        │       ├── card.tsx
+        │       ├── dialog.tsx
+        │       ├── dropdown-menu.tsx
+        │       ├── input.tsx
+        │       ├── label.tsx
+        │       ├── resizable.tsx
+        │       ├── scroll-area.tsx
+        │       ├── select.tsx
+        │       ├── switch.tsx
+        │       └── textarea.tsx
+        ├── constants/
+        │   └── index.ts
+        ├── hooks/
+        │   ├── useGetCallById.ts
+        │   ├── useGetCalls.ts
+        │   ├── useMeetingActions.ts
+        │   └── useUserRole.ts
+        └── lib/
+            └── utils.ts
+```
+
+
+---
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Auth**: Clerk.dev
+- **Backend**: Convex (Serverless Functions + DB)
+- **Video**: Stream Video SDK
+- **Styling**: TailwindCSS + ShadCN
+- **Type Safety**: TypeScript
+- **Hosting**: Vercel
+
+---
+
+## 🧪 Local Development
+
+1. **Clone the repo:**
+```bash
+   git clone https://github.com/your-username/pratham22r-evalmeet.git
+   cd pratham22r-evalmeet
+```
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables:**
+
+Create a .env.local file and add your keys for:
+
+    *Clerk
+
+    *Convex
+
+    *Stream
+
+4. **Run the development server:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+EvalMeet is deployed on Vercel. You can deploy your own version by:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Forking the repo
 
-## Learn More
+Connecting it to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+Adding the required environment variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contribution
+If you'd like to contribute:
 
-## Deploy on Vercel
+Fork the repo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a new branch
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Submit a pull request
+
+Open to ideas, bug fixes, UI enhancements, or documentation help!
+
+---
+
+## 📬 Contact
+
+Feel free to reach out for collaboration, suggestions, or questions:
+
+    *🌐 Website: https://pratham-portfolio-op6k.onrender.com/
+
+    *💼 LinkedIn: https://www.linkedin.com/in/pratham-raghuvanshi-9b782127b/
+
+    *🐙 GitHub: https://github.com/Pratham22R
+
+---
+
+Made with ❤️ by Pratham
