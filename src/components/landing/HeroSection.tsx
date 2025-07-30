@@ -35,7 +35,7 @@ export default function HeroSection() {
       <div className="mt-20 flex justify-center">
         <div className="relative w-full max-w-5xl p-2 rounded-[10px] border border-white/10 bg-white/5 backdrop-blur-lg overflow-hidden">
           <Image
-            src="/chatbox-preview.png"
+            src="/hero.png"
             alt="EvalMeet IDE Preview"
             width={960}
             height={540}
