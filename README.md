@@ -162,11 +162,11 @@ npm install
 
 Create a .env.local file and add your keys for:
 
-    *Clerk
+    Clerk
 
-    *Convex
+    Convex
 
-    *Stream
+    Stream
 
 4. **Run the development server:**
 
@@ -204,11 +204,11 @@ Open to ideas, bug fixes, UI enhancements, or documentation help!
 
 Feel free to reach out for collaboration, suggestions, or questions:
 
-    *🌐 Website: https://pratham-portfolio-op6k.onrender.com/
+    🌐 Website: https://pratham-portfolio-op6k.onrender.com/
 
-    *💼 LinkedIn: https://www.linkedin.com/in/pratham-raghuvanshi-9b782127b/
+    💼 LinkedIn: https://www.linkedin.com/in/pratham-raghuvanshi-9b782127b/
 
-    *🐙 GitHub: https://github.com/Pratham22R
+    🐙 GitHub: https://github.com/Pratham22R
 
 ---
 
