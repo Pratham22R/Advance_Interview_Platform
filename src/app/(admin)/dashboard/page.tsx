@@ -59,93 +59,82 @@ function DashboardPage() {
   );
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <div className="flex justify-between items-center flex-wrap gap-4 mb-8">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
+    <div className="max-w-2xl mx-auto px-2 py-6">
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-lg font-medium">Dashboard</span>
         <Link href="/schedule">
-          <Button>
-            <CalendarPlusIcon className="h-4 w-4 mr-2" />
-            Schedule New Interview
+          <Button size="sm" variant="outline">
+            <CalendarPlusIcon className="h-4 w-4 mr-1" />
+            Schedule
           </Button>
         </Link>
       </div>
 
       {!hasInterviews ? (
-        <div className="flex flex-col items-center justify-center text-center py-20">
-          <CalendarIcon className="w-12 h-12 text-muted-foreground mb-4" />
-          <h2 className="text-xl font-semibold mb-2">No Interviews Yet</h2>
-          <p className="text-muted-foreground max-w-md">
-            Once you schedule interviews, they’ll show up here for tracking and evaluation.
-          </p>
+        <div className="text-center text-muted-foreground py-12 text-sm">
+          No interviews yet.
         </div>
       ) : (
-        <div className="space-y-12">
+        <div className="space-y-6">
           {INTERVIEW_CATEGORY.map(
             (category) =>
               groupedInterviews[category.id]?.length > 0 && (
                 <section key={category.id}>
-                  <div className="flex items-center gap-2 mb-4">
-                    <h2 className="text-xl font-semibold">{category.title}</h2>
-                    <Badge variant={category.variant}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-base font-semibold">{category.title}</span>
+                    <Badge variant={category.variant} className="text-xs">
                       {groupedInterviews[category.id].length}
                     </Badge>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {groupedInterviews[category.id].map((interview: Interview) => {
                       const candidateInfo = getCandidateInfo(users, interview.candidateId);
                       const startTime = new Date(interview.startTime);
 
                       return (
-                        <Card key={interview._id} className="hover:shadow-md transition-all">
-                          <CardHeader className="p-4">
-                            <div className="flex items-center gap-3">
-                              <Avatar className="h-10 w-10">
-                                <AvatarImage src={candidateInfo.image} />
-                                <AvatarFallback>{candidateInfo.initials}</AvatarFallback>
-                              </Avatar>
-                              <div>
-                                <CardTitle className="text-base">{candidateInfo.name}</CardTitle>
-                                <p className="text-sm text-muted-foreground">{interview.title}</p>
-                              </div>
+                        <Card key={interview._id} className="p-3">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Avatar className="h-8 w-8">
+                              <AvatarImage src={candidateInfo.image} />
+                              <AvatarFallback>{candidateInfo.initials}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                              <div className="text-sm font-medium">{candidateInfo.name}</div>
+                              <div className="text-xs text-muted-foreground">{interview.title}</div>
                             </div>
-                          </CardHeader>
-
-                          <CardContent className="p-4">
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                              <div className="flex items-center gap-1">
-                                <CalendarIcon className="h-4 w-4" />
-                                {format(startTime, "MMM dd")}
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <ClockIcon className="h-4 w-4" />
-                                {format(startTime, "hh:mm a")}
-                              </div>
+                          </div>
+                          <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                            <span className="flex items-center gap-1">
+                              <CalendarIcon className="h-3 w-3" />
+                              {format(startTime, "MMM dd")}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <ClockIcon className="h-3 w-3" />
+                              {format(startTime, "hh:mm a")}
+                            </span>
+                          </div>
+                          {interview.status === "completed" && (
+                            <div className="flex gap-1 mb-2">
+                              <Button
+                                size="sm"
+                                className="flex-1"
+                                onClick={() => handleStatusUpdate(interview._id, "succeeded")}
+                              >
+                                <CheckCircle2Icon className="h-3 w-3 mr-1" />
+                                Pass
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                className="flex-1"
+                                onClick={() => handleStatusUpdate(interview._id, "failed")}
+                              >
+                                <XCircleIcon className="h-3 w-3 mr-1" />
+                                Fail
+                              </Button>
                             </div>
-                          </CardContent>
-
-                          <CardFooter className="p-4 pt-0 flex flex-col gap-3">
-                            {interview.status === "completed" && (
-                              <div className="flex gap-2 w-full">
-                                <Button
-                                  className="flex-1"
-                                  onClick={() => handleStatusUpdate(interview._id, "succeeded")}
-                                >
-                                  <CheckCircle2Icon className="h-4 w-4 mr-2" />
-                                  Pass
-                                </Button>
-                                <Button
-                                  variant="destructive"
-                                  className="flex-1"
-                                  onClick={() => handleStatusUpdate(interview._id, "failed")}
-                                >
-                                  <XCircleIcon className="h-4 w-4 mr-2" />
-                                  Fail
-                                </Button>
-                              </div>
-                            )}
-                            <CommentDialog interviewId={interview._id} />
-                          </CardFooter>
+                          )}
+                          <CommentDialog interviewId={interview._id} />
                         </Card>
                       );
                     })}
