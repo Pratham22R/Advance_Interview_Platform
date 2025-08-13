@@ -37,7 +37,7 @@ function Navbar() {
               </Button>
             )}
             {pathname !== "/dashboard" && <DasboardBtn />}
-            <ModeToggle />
+            <ModeToggle /> 
             <UserButton />
           </div>
         </SignedIn>
