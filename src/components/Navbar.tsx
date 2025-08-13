@@ -6,6 +6,7 @@ import DasboardBtn from "./DasboardBtn";
 import { useUserRole } from "../hooks/useUserRole";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
+import { ModeToggle } from "./ModeToggle";
 
 function Navbar() {
   const { isInterviewer } = useUserRole();
@@ -19,7 +20,7 @@ function Navbar() {
           href="/"
           className="flex items-center gap-2 font-semibold text-2xl font-mono hover:opacity-80 transition-opacity"
         >
-          <CodeIcon className="size-8 text-emerald-500" />
+          {/* <CodeIcon className="size-8 text-emerald-500" /> */}
           <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
             EvalMeet
           </span>
@@ -36,6 +37,7 @@ function Navbar() {
               </Button>
             )}
             {pathname !== "/dashboard" && <DasboardBtn />}
+            <ModeToggle />
             <UserButton />
           </div>
         </SignedIn>
